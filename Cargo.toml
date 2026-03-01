@@ -1,0 +1,20 @@
+[package]
+authors     = [ "Josh Junon (https://github.com/qix)" ]
+description = "TOML formatter CLI and library"
+edition     = "2024"
+homepage    = "https://github.com/oro-os/toml"
+license     = "MIT OR Apache-2.0"
+name        = "tomt"
+repository  = "https://github.com/oro-os/tomt"
+version     = "0.1.0"
+
+[features]
+clap    = [ "dep:clap" ]
+default = [ "clap" ]
+
+[dependencies]
+clap      = { features = [ "derive" ], optional = true, version = "4.5.60" }
+fast-glob = "1.0.0"
+ignore    = "0.4.25"
+taplo     = { features = [ "serde" ], version = "0.14.0" }
+toml      = "1.0.3+spec-1.1.0"
