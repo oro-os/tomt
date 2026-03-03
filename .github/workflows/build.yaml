@@ -1,0 +1,46 @@
+name: Build and Lint
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+env:
+  RUST_BACKTRACE: full
+
+jobs:
+  clippy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/deps
+      - name: Clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/deps
+      - name: Build
+        run: cargo build --all-targets --all-features --release
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/deps
+      - name: Build Docs
+        run: env RUSTFLAGS="-D warnings" RUSTDOCFLAGS="-D warnings" cargo doc --all-features --no-deps
+  lint-tomt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/deps
+      - name: Lint TOML files
+        run: cargo run -- --check
+  lint-fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/deps
+      - name: Check code formatting
+        run: cargo fmt --all -- --check

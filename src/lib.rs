@@ -40,7 +40,7 @@ impl Args {
             return Some(PathBuf::from(config_file));
         }
 
-        let mut cur = PathBuf::from(std::env::current_dir().unwrap_or_else(|_| PathBuf::from(".")));
+        let mut cur = std::env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
         loop {
             let candidate = cur.join(".tomlfmt.toml");
             if candidate.is_file() {
@@ -65,16 +65,14 @@ fn read_config(config_path: impl AsRef<Path>) -> Config {
         String::new()
     });
 
-    let config = toml::from_str::<Config>(&config_str).unwrap_or_else(|e| {
+    toml::from_str::<Config>(&config_str).unwrap_or_else(|e| {
         eprintln!(
             "warning: failed to parse config file {}: {}",
             config_path.as_ref().display(),
             e
         );
         Config::default()
-    });
-
-    config
+    })
 }
 
 /// Events that occur during formatting.

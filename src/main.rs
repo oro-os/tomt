@@ -10,12 +10,10 @@ fn main() {
                 if success {
                     if args.check {
                         println!("{count} files checked");
+                    } else if count == 0 {
+                        println!("no files formatted");
                     } else {
-                        if count == 0 {
-                            println!("no files formatted");
-                        } else {
-                            println!("formatted {count} files");
-                        }
+                        println!("formatted {count} files");
                     }
                 } else {
                     if args.check {
