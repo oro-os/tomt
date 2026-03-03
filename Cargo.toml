@@ -30,4 +30,4 @@ clap      = { version = "4.5.60", features = [ "derive" ], optional = true }
 fast-glob = "1.0.0"
 ignore    = "0.4.25"
 taplo     = { version = "0.14.0", features = [ "serde" ] }
-toml      = "1.0.3+spec-1.1.0"
+toml      = "1.0.3"
