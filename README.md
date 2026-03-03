@@ -23,7 +23,8 @@ that are `.gitignore`'d.
 `tomt` exits non-zero only on I/O errors; TOML syntax errors are silently ignored and retained.
 `tomt` is not a TOML linter, just a formatter.
 
-Passing `-c`/`--check` causes `tomt` to exit non-zero if formatting _would_ caused a change in the file contents. This can be used for CI/CD steps, etc.
+Passing `-c`/`--check` causes `tomt` to exit non-zero if formatting _would_
+cause a change in the file contents. This can be used for CI/CD steps, etc.
 
 # License
 
